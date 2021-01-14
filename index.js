@@ -1,5 +1,9 @@
+//Esta línea evita que ocurra un error que bloquea por CORS el XMLHttpRequest 
 const PROXY_URL = "https://quiet-plains-83026.herokuapp.com/";
-const API = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=ce38fba1-db16-49a7-802e-94ad5d7d0902'
+//ACÁ VA LA API KEY QUE PODES CONSEGUIR EN PRO.COINMARKETCAP.COM
+const API_KEY = 'ACÁ';
+const API = `https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=${API_KEY}`;
+//Selección de elementos del DOM
 const elementoNombre = document.querySelectorAll('.nombre');
 const elementoPrecio = document.querySelectorAll('.precio');
 const elementoSimbolo = document.querySelectorAll('.simbolo');
@@ -13,7 +17,7 @@ const elementoBotonSat = document.querySelectorAll('.botonsat');
 const elementoInputSatoshis = document.querySelectorAll('.inputSat');
 const elementoUsdSat = document.querySelectorAll('.usdsat');
 
-
+//Funcion fetch data (usando promesas), con la cual se obtienen los datos
 const fetchData = (api_url) => {
     return new Promise((resolve, reject) => {
         const xhttp = new XMLHttpRequest();
@@ -28,16 +32,10 @@ const fetchData = (api_url) => {
     xhttp.send();
     });
 }
+//Aca se utiliza Async y Await para obtener y mostrar todos los datos, asignar imagenes según el nombre, hacer converisones ...
 const obtain = async ()=>{
     try {
         const obtainData = await fetchData(PROXY_URL + API);
-        
-//         let precio = obtainData.data[0].quote.USD.price;
-//         precio = precio.toFixed(2);
-//         precio = precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-//         precio = `$ ${precio} USD`;
-//         elementoPrecio.innerHTML = precio;
-// //--------------------------------------------------------
         const obtenerMostrar = num => {
             let precio = obtainData.data[num].quote.USD.price;
             elementoPrecioOculto[num].innerHTML = precio;
