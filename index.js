@@ -140,4 +140,6 @@ const obtain = async ()=>{
         console.error(error)
     }
 }
-obtain();
+setInterval(() => {
+    obtain();
+}, 5000);
